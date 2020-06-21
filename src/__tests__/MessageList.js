@@ -9,7 +9,7 @@ jest.mock("axios")
 
 describe("MessageList component", () => {
   describe("when rendered", () => {
-    test("should fetch a list of messages", async () => {
+    test("should fetch a list of messages and show them all", async () => {
       const getSpy = jest.spyOn(axios, "get")
       render(<MessageList />)
       expect(getSpy).toBeCalled()
