@@ -16,5 +16,11 @@ describe("MessageList component", () => {
       const items = await screen.findAllByText(/Created At :/)
       expect(items).toHaveLength(11)
     })
+    test("fetches messages from an API and fails", async () => {
+      axios.get.mockImplementationOnce(() => Promise.reject(new Error()))
+      render(<MessageList />)
+      const message = await screen.findByText(/Erreur 500/)
+      expect(message).toBeInTheDocument()
+    })
   })
 })

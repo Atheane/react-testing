@@ -19,7 +19,7 @@ const MessageList = () => {
   }, [])
 
   return error ? (
-    <span> Something went wrong ... </span>
+    <span> Erreur 500 </span>
   ) : (
     messages.map((message) => <Message key={message.createdAt} {...message} />)
   )
