@@ -3,15 +3,15 @@ import { arrayOf, shape, string } from "prop-types"
 import Message from "./Message"
 
 const MessageList = ({ messages }) =>
-  messages.map((message) => <Message key={message.createdAt} />)
+  messages.map((message) => <Message key={message.createdAt} {...message} />)
 
 MessageList.propTypes = {
   arrayWithShape: arrayOf(
     shape({
       createdAt: string.isRequired,
       message: string.isRequired,
-    })
-  ).isRequired,
+    }).isRequired
+  ),
 }
 
 export default MessageList
