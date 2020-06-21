@@ -1,6 +1,5 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
-
 import axios from "axios"
 
 import MessageList from "../components/MessageList"
@@ -15,6 +14,22 @@ describe("MessageList component", () => {
       expect(getSpy).toBeCalled()
       const items = await screen.findAllByText(/Created At :/)
       expect(items).toHaveLength(11)
+    })
+    test("fetches messages from an API and fails with 404 message error", async () => {
+      axios.get.mockImplementationOnce(() =>
+        Promise.reject(new Error("Erreur 404"))
+      )
+      render(<MessageList />)
+      const message = await screen.findByText(/Erreur 404/)
+      expect(message).toBeInTheDocument()
+    })
+    test("fetches messages from an API and fails with 500 message error", async () => {
+      axios.get.mockImplementationOnce(() =>
+        Promise.reject(new Error("Erreur 500"))
+      )
+      render(<MessageList />)
+      const message = await screen.findByText(/Erreur 500/)
+      expect(message).toBeInTheDocument()
     })
   })
 })
