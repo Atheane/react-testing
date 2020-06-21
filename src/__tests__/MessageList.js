@@ -1,5 +1,5 @@
 import React from "react"
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 
 import axios from "axios"
 
@@ -9,16 +9,12 @@ jest.mock("axios")
 
 describe("MessageList component", () => {
   describe("when rendered", () => {
-    it("should fetch a list of messages", () => {
+    test("should fetch a list of messages", async () => {
       const getSpy = jest.spyOn(axios, "get")
-      render(
-        <MessageList
-          messages={[
-            { createdAt: "2020-06-21T10:18:22.045Z", message: "plop" },
-          ]}
-        />
-      )
+      render(<MessageList />)
       expect(getSpy).toBeCalled()
+      const items = await screen.findAllByText(/Created At :/)
+      expect(items).toHaveLength(11)
     })
   })
 })

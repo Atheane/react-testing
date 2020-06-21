@@ -4,8 +4,8 @@ import "../assets/scss/Message.scss"
 
 const Message = ({ createdAt, message }) => (
   <div className="message-bubble">
-    <div>{createdAt}</div>
-    <div>{message}</div>
+    <div>Created At : {createdAt}</div>
+    <div>Message : {message}</div>
   </div>
 )
 
