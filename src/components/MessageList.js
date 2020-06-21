@@ -9,7 +9,7 @@ const MessageList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get()
+        const result = await axios.get("/messages")
         setMessages(result.data)
       } catch (err) {
         setError(err)
@@ -19,7 +19,7 @@ const MessageList = () => {
   }, [])
 
   return error ? (
-    <span> Erreur 500 </span>
+    <span> {error.message} </span>
   ) : (
     messages.map((message) => <Message key={message.createdAt} {...message} />)
   )
