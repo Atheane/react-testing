@@ -1,28 +1,21 @@
-import React, { useState, useEffect } from "react"
-import axios from "../__mocks__/axios"
+import React from "react"
+import { arrayOf, shape, string } from "prop-types"
+
 import Message from "./Message"
 
-const MessageList = () => {
-  const [messages, setMessages] = useState([])
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await axios.get("/messages")
-        setMessages(result.data)
-      } catch (err) {
-        setError(err)
-      }
-    }
-    fetchData()
-  }, [])
-
-  return error ? (
-    <span> {error.message} </span>
-  ) : (
-    messages.map((message) => <Message key={message.createdAt} {...message} />)
-  )
+const MessageListUI = ({ messages }) => {
+  return messages.map((message) => (
+    <Message key={message.createdAt} {...message} />
+  ))
 }
 
-export default MessageList
+MessageListUI.propTypes = {
+  arrayWithShape: arrayOf(
+    shape({
+      createdAt: string.isRequired,
+      message: string.isRequired,
+    })
+  ),
+}
+
+export default MessageListUI
