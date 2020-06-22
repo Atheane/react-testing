@@ -1,28 +1,31 @@
-import React, { useState, useEffect } from "react"
-import axios from "../__mocks__/axios"
+import React from "react"
+import { arrayOf, shape, string } from "prop-types"
+
 import Message from "./Message"
+import DateUI from "./DateUI"
 
-const MessageList = () => {
-  const [messages, setMessages] = useState([])
-  const [error, setError] = useState(null)
+import "../assets/scss/MessageList.scss"
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await axios.get("/messages")
-        setMessages(result.data)
-      } catch (err) {
-        setError(err)
-      }
-    }
-    fetchData()
-  }, [])
-
-  return error ? (
-    <span> {error.message} </span>
-  ) : (
-    messages.map((message) => <Message key={message.createdAt} {...message} />)
+const MessageListUI = ({ messages }) => {
+  return (
+    <div className="list-container">
+      {messages.map((item) => (
+        <div key={item.createdAt} className="item-container">
+          <DateUI createdAt={item.createdAt} />
+          <Message message={item.message} />
+        </div>
+      ))}
+    </div>
   )
 }
 
-export default MessageList
+MessageListUI.propTypes = {
+  messages: arrayOf(
+    shape({
+      createdAt: string.isRequired,
+      message: string.isRequired,
+    })
+  ).isRequired,
+}
+
+export default MessageListUI
