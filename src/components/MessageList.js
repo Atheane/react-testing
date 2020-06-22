@@ -12,7 +12,7 @@ const MessageListUI = ({ messages }) => {
       {messages.map((item) => (
         <div key={item.createdAt} className="item-container">
           <DateUI createdAt={item.createdAt} />
-          <Message message={item.message} />
+          <Message messageText={item.messageText} />
         </div>
       ))}
     </div>
@@ -23,7 +23,7 @@ MessageListUI.propTypes = {
   messages: arrayOf(
     shape({
       createdAt: string.isRequired,
-      message: string.isRequired,
+      messageText: string.isRequired,
     })
   ).isRequired,
 }

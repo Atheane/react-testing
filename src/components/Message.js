@@ -2,10 +2,12 @@ import React from "react"
 import { string } from "prop-types"
 import "../assets/scss/Message.scss"
 
-const Message = ({ message }) => <div className="message-bubble">{message}</div>
+const Message = ({ messageText }) => (
+  <div className="message-bubble">{messageText}</div>
+)
 
 Message.propTypes = {
-  message: string.isRequired,
+  messageText: string.isRequired,
 }
 
 export default Message
