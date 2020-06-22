@@ -9,7 +9,6 @@ const MessageList = () => {
   } = useContext(StoreContext)
 
   const [error, setError] = useState(null)
-
   useEffect(() => {
     const fetchData = async () => {
       try {

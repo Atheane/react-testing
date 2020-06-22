@@ -15,13 +15,15 @@ const TextArea = () => {
   }
 
   const handleOnSubmit = () => {
-    dispatchMessages({
-      type: "ADD_MESSAGE",
-      payload: {
-        createdAt: new Date(),
-        messageText,
-      },
-    })
+    if (messageText) {
+      dispatchMessages({
+        type: "ADD_MESSAGE",
+        payload: {
+          createdAt: new Date(),
+          messageText,
+        },
+      })
+    }
   }
 
   return (
