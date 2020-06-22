@@ -1,20 +1,68 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
-import TextArea from "../components/TextArea"
+import userEvent from "@testing-library/user-event"
+import TextAreaUI from "../components/TextArea"
 
 describe("TextArea component", () => {
   describe("when rendered", () => {
     test("placeholder and message are displayed", () => {
-      const message = {
-        createdAt: "2020-06-22T05:31:43.209Z",
-        messageText: "Hello World",
-      }
       const { getByPlaceholderText } = render(
-        <TextArea handleChange={() => {}} message={message} />
+        <TextAreaUI
+          handleOnChange={() => {}}
+          handleOnSubmit={() => {}}
+          messageText="Hello World"
+        />
       )
-      const placeholderText = getByPlaceholderText("Enter a message")
-      expect(placeholderText).toBeInTheDocument()
+      const textAreaNode = getByPlaceholderText("Enter a message")
+      expect(textAreaNode).toBeInTheDocument()
       const messageTextArea = screen.getByDisplayValue("Hello World")
+      expect(messageTextArea).toBeInTheDocument()
+    })
+  })
+  describe("when user enter message", () => {
+    test("callBack handleOnChange is called the right number of times", () => {
+      const handleOnChange = jest.fn()
+      render(
+        <TextAreaUI
+          handleOnChange={handleOnChange}
+          handleOnSubmit={() => {}}
+          messageText="Hello World" // for propTypes checks
+        />
+      )
+      userEvent.type(screen.getByRole("textbox"), "message test")
+      expect(handleOnChange).toHaveBeenCalledTimes("message test".length)
+    })
+  })
+  describe("when user click on send", () => {
+    test("callBack handleOnClick is called", () => {
+      const handleOnSubmit = jest.fn()
+      render(
+        <TextAreaUI
+          handleOnChange={() => {}}
+          handleOnSubmit={handleOnSubmit}
+          messageText="Hello World" // for propTypes checks
+        />
+      )
+      userEvent.click(screen.getByRole("button"))
+      expect(handleOnSubmit).toHaveBeenCalledTimes(1)
+    })
+  })
+  describe("when user enter a message and click on send", () => {
+    test("setMessage state is updated with a message objet that have the right form", () => {
+      const handleOnChange = jest.fn()
+      const handleOnSubmit = jest.fn()
+
+      render(
+        <TextAreaUI
+          handleOnChange={handleOnChange}
+          handleOnSubmit={handleOnSubmit}
+          // messageText="Hello World" // for propTypes checks
+        />
+      )
+      userEvent.type(screen.getByRole("textbox"), "message test")
+      userEvent.click(screen.getByRole("button"))
+
+      const messageTextArea = screen.getByDisplayValue("message test")
       expect(messageTextArea).toBeInTheDocument()
     })
   })

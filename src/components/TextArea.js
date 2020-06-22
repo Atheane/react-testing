@@ -1,18 +1,18 @@
 import React from "react"
-import { func, shape, string } from "prop-types"
+import { func, string } from "prop-types"
 import { SendOutlined } from "@ant-design/icons"
 import "../assets/scss/TextArea.scss"
 
-const TextAreaComponent = ({ handleChange, message }) => {
+const TextAreaComponent = ({ handleOnChange, handleOnSubmit, messageText }) => {
   return (
     <div className="stuck">
       <div className="container">
         <textarea
-          onChange={handleChange}
-          value={message.messageText}
+          onChange={handleOnChange}
+          value={messageText}
           placeholder="Enter a message"
         />
-        <button type="submit">
+        <button type="submit" onClick={handleOnSubmit}>
           <SendOutlined />
         </button>
       </div>
@@ -21,11 +21,9 @@ const TextAreaComponent = ({ handleChange, message }) => {
 }
 
 TextAreaComponent.propTypes = {
-  handleChange: func.isRequired,
-  message: shape({
-    createdAt: string.isRequired,
-    messageText: string.isRequired,
-  }).isRequired,
+  handleOnChange: func.isRequired,
+  handleOnSubmit: func.isRequired,
+  messageText: string,
 }
 
 export default TextAreaComponent
