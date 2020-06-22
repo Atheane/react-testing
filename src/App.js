@@ -4,20 +4,28 @@ import SimpleBar from "simplebar-react"
 import Header from "./components/Header"
 import MessageList from "./containers/MessageList"
 import TextArea from "./containers/TextArea"
+import { StoreProvider } from "./Store"
+
 import "simplebar/dist/simplebar.min.css"
 
 import "./assets/scss/App.scss"
 
-const App = () => {
+const App = () => (
+  <div className="App">
+    <Header />
+    <SimpleBar>
+      <MessageList />
+      <TextArea />
+    </SimpleBar>
+  </div>
+)
+
+const AppWithStore = () => {
   return (
-    <div className="App">
-      <Header />
-      <SimpleBar>
-        <MessageList />
-        <TextArea />
-      </SimpleBar>
-    </div>
+    <StoreProvider>
+      <App />
+    </StoreProvider>
   )
 }
 
-export default App
+export default AppWithStore

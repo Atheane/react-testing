@@ -65,4 +65,16 @@ module.exports = {
     }
     return new Error("Erreur 404")
   },
+  post: (endpoint, data) => {
+    if (endpoint === "/message") {
+      return Promise.resolve({
+        data: {
+          message: {
+            ...data,
+          },
+        },
+      })
+    }
+    return new Error("Erreur 404")
+  },
 }
