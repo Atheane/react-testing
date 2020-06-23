@@ -1,10 +1,13 @@
-import React from "react"
-import MessageList from "../containers/MessageList"
+import React, { Suspense, lazy } from "react"
 import TextArea from "../containers/TextArea"
+
+const LazyMessageList = lazy(() => import("../containers/MessageList"))
 
 export default () => (
   <>
-    <MessageList />
+    <Suspense fallback={<div>Loading...</div>}>
+      <LazyMessageList />
+    </Suspense>
     <TextArea />
   </>
 )
