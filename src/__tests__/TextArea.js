@@ -37,33 +37,11 @@ describe("TextArea component", () => {
     test("callBack handleOnClick is called", () => {
       const handleOnSubmit = jest.fn()
       render(
-        <TextAreaUI
-          handleOnChange={() => {}}
-          handleOnSubmit={handleOnSubmit}
-          messageText="Hello World" // for propTypes checks
-        />
+        <TextAreaUI handleOnChange={() => {}} handleOnSubmit={handleOnSubmit} />
       )
       userEvent.click(screen.getByRole("button"))
       expect(handleOnSubmit).toHaveBeenCalledTimes(1)
     })
-    // test("callBack handleOnClick is not called is message Text is empty", () => {
-    //   const handleOnChange = jest.fn()
-    //   const handleOnSubmit = jest.fn()
-
-    //   render(
-    //     <TextAreaUI
-    //       handleOnChange={handleOnChange}
-    //       handleOnSubmit={handleOnSubmit}
-    //       // messageText="Hello World" // for propTypes checks
-    //     />
-    //   )
-    //   userEvent.type(screen.getByRole("textbox"), "message test")
-    //   userEvent.click(screen.getByRole("button"))
-
-    //   const messageTextArea = screen.getByDisplayValue("")
-    //   screen.debug()
-    //   expect(messageTextArea).toBeNull()
-    // })
   })
   describe("when user enter a message and click on send", () => {
     test("messages list is updated with a message objet that have the right form", () => {
@@ -74,7 +52,6 @@ describe("TextArea component", () => {
         <TextAreaUI
           handleOnChange={handleOnChange}
           handleOnSubmit={handleOnSubmit}
-          // messageText="Hello World" // for propTypes checks
         />
       )
       userEvent.type(screen.getByRole("textbox"), "message test")
