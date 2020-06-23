@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react"
 import axios from "../__mocks__/axios"
-import MessageListUI from "../components/MessageList"
 import { StoreContext } from "../Store"
 import useScroll from "../hooks/useScroll"
+
+import MessageListUI from "../components/MessageList"
 
 const MessageList = () => {
   const {
