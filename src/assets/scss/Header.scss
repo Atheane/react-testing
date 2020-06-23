@@ -11,12 +11,9 @@
   right: 0;
   z-index: 1000;
   background-color: #0f1417;
-  max-height: 20vh;
+  color:white;
+  height: 10vh;
   display: flex;
   align-items: center;
   font-size: calc(10px + 2vmin);
-}
-
-.ant-page-header-heading-title {
-  color:#c9c7c7;
 }
