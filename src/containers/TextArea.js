@@ -23,6 +23,7 @@ const TextArea = () => {
           messageText,
         },
       })
+      setMessageText("")
     }
   }
 

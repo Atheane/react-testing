@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react"
 import axios from "../__mocks__/axios"
 import MessageListUI from "../components/MessageList"
 import { StoreContext } from "../Store"
+import useScroll from "../hooks/useScroll"
 
 const MessageList = () => {
   const {
@@ -21,10 +22,12 @@ const MessageList = () => {
     fetchData()
   }, [dispatchMessages])
 
+  const messagesEndRef = useScroll()
+
   return error ? (
     <span> {error.message} </span>
   ) : (
-    <MessageListUI messages={messages} />
+    <MessageListUI messages={messages} messagesEndRef={messagesEndRef} />
   )
 }
 

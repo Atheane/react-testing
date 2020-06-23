@@ -6,15 +6,16 @@ import DateUI from "./DateUI"
 
 import "../assets/scss/MessageList.scss"
 
-const MessageListUI = ({ messages }) => {
+const MessageListUI = ({ messages, messagesEndRef }) => {
   return (
-    <div className="list-container">
+    <div className="list-container" id="chat">
       {messages.map((item) => (
         <div key={item.createdAt} className="item-container">
           <DateUI createdAt={item.createdAt} />
           <Message messageText={item.messageText} />
         </div>
       ))}
+      <div ref={messagesEndRef} />
     </div>
   )
 }

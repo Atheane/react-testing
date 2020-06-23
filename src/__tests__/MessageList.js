@@ -15,7 +15,9 @@ describe("MessageList component", () => {
       const getSpy = jest.spyOn(axios, "get")
       render(Provider(<MessageList />))
       expect(getSpy).toBeCalled()
-      const items = await screen.findAllByText(/^21-06-2020/i)
+      const items = await screen.findAllByText(
+        /^([0-2][0-9]|(3)[0-1])-(((0)[0-9])|((1)[0-2]))-(\d{4})/i
+      )
       expect(items).toHaveLength(11)
     })
     test("fetches messages from an API and fails with 404 message error", async () => {
