@@ -37,18 +37,14 @@ describe("TextArea component", () => {
     test("callBack handleOnClick is called", () => {
       const handleOnSubmit = jest.fn()
       render(
-        <TextAreaUI
-          handleOnChange={() => {}}
-          handleOnSubmit={handleOnSubmit}
-          messageText="Hello World" // for propTypes checks
-        />
+        <TextAreaUI handleOnChange={() => {}} handleOnSubmit={handleOnSubmit} />
       )
       userEvent.click(screen.getByRole("button"))
       expect(handleOnSubmit).toHaveBeenCalledTimes(1)
     })
   })
   describe("when user enter a message and click on send", () => {
-    test("setMessage state is updated with a message objet that have the right form", () => {
+    test("messages list is updated with a message objet that have the right form", () => {
       const handleOnChange = jest.fn()
       const handleOnSubmit = jest.fn()
 
@@ -56,7 +52,6 @@ describe("TextArea component", () => {
         <TextAreaUI
           handleOnChange={handleOnChange}
           handleOnSubmit={handleOnSubmit}
-          // messageText="Hello World" // for propTypes checks
         />
       )
       userEvent.type(screen.getByRole("textbox"), "message test")

@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useContext } from "react"
 import TextAreaUI from "../components/TextArea"
+import { StoreContext } from "../Store"
 
 const TextArea = () => {
+  const {
+    data: { dispatchMessages },
+  } = useContext(StoreContext)
+
   const [messageText, setMessageText] = useState("")
-  const [message, setMessage] = useState(null)
 
   const handleOnChange = ({ target: { value } }) => {
     console.log(value)
@@ -11,17 +15,17 @@ const TextArea = () => {
   }
 
   const handleOnSubmit = () => {
-    console.log("click")
-    setMessage({
-      createdAt: new Date(),
-      messageText,
-    })
+    if (messageText) {
+      dispatchMessages({
+        type: "ADD_MESSAGE",
+        payload: {
+          createdAt: new Date(),
+          messageText,
+        },
+      })
+      setMessageText("")
+    }
   }
-
-  useEffect(() => {
-    // dispatch({ type: 'ADD_MESSAGE', payload: message })
-    console.log(message)
-  }, [message])
 
   return (
     <TextAreaUI

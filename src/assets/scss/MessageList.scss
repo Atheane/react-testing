@@ -1,6 +1,9 @@
 .list-container {
   position: relative;
   top:100px;
+  margin-bottom: 50px;
+  height: 80vh;
+  overflow-y: auto;
 }
 
 .item-container {
