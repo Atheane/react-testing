@@ -5,11 +5,10 @@ export default (state, action) => {
   console.log("Action", action.type)
   // console.log("payload", action.payload)
   switch (action.type) {
-    // case 'LAZY_LOAD':
-    //   const newlyLoadedMessages = axios.get('')
-    //   return [...state, ]
-    case "LOAD_ALL":
+    case "LAZY_LOAD":
       return [...state, ...action.payload]
+    case "LOAD_MORE":
+      return [...action.payload, ...state]
     case "ADD_MESSAGE":
       axios.post("/message", {
         ...action.payload,
